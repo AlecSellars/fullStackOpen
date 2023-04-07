@@ -1,0 +1,94 @@
+[0.4: New note diagram]
+
+https://mermaid.ink/img/pako:eNq9VGFv0zAQ_SsnfwKpTdYUui0fJiFRgdA20Fr4AEXItS-NWWIH-9x1qvrfuTQpAoYQg4l-iOp3vpfnl_PbCuU0ilwE_BLRKnxu5MrLemGBf430ZJRppCWIAf1ddOndzS8LDK5bvKu0zcOzs353DlNL6AMQbgiMJcePJjKb24C0GlRl1HWA2bN3066_b2SKjjeHN69n80N_28ocXQkkQWrx5pN1hCC19hhCxyIVmbVk9CCuBbv_w-_VXWFoHMu4MVTC-CiDQJJigEdvr87BozYeFT3u2jXeYeXC4dx3db-YzqEkakKepoGiNhgSFZISq2DstUkKk-JG1k2FsmnS9gz3FP9yfnEO2qlYo6XfaXwAebU0lsv3VEglAjdBYSr8HwI__4W-V3ItZ8qbhv5E5mU7at6sSgJXwDeiORP1i3aEPAXADapIxq5-fkt7DRnj4S2QVImh2zB7fQmFd_V-9bDeaEmSvXH2fu582MKCQ4MvMI-XyHmxnzjDZ5PhdiEGjDA1drXsKBsPR8PRQsBuAEmSwMd_97IzsbdIyapaSnUNRbTM6Gznoker9xHDW_a3aMBBoSo2pfeeIwKcRTEQNXqeE80huG0lLASX616_xkLGig-6sDveKiO52a1VIicfcSBi0x61z8wfwak25LzIC1kFBisnWY_It4JumzZwVyYQM7KThVm1ePQVw4fv15aTFQdQXCbK1WkwuuQJKtenk3SSTU5kNsbJ8Vg-HY-1Wo5OT4rsyajQx0ejTIrdbiBw__6LLt33IT8QnMzvnat7UbuvuG0THA?type=png)](https://mermaid.live/edit#pako:eNq9VGFv0zAQ_SsnfwKpTdYUui0fJiFRgdA20Fr4AEXItS-NWWIH-9x1qvrfuTQpAoYQg4l-iOp3vpfnl_PbCuU0ilwE_BLRKnxu5MrLemGBf430ZJRppCWIAf1ddOndzS8LDK5bvKu0zcOzs353DlNL6AMQbgiMJcePJjKb24C0GlRl1HWA2bN3066_b2SKjjeHN69n80N_28ocXQkkQWrx5pN1hCC19hhCxyIVmbVk9CCuBbv_w-_VXWFoHMu4MVTC-CiDQJJigEdvr87BozYeFT3u2jXeYeXC4dx3db-YzqEkakKepoGiNhgSFZISq2DstUkKk-JG1k2FsmnS9gz3FP9yfnEO2qlYo6XfaXwAebU0lsv3VEglAjdBYSr8HwI__4W-V3ItZ8qbhv5E5mU7at6sSgJXwDeiORP1i3aEPAXADapIxq5-fkt7DRnj4S2QVImh2zB7fQmFd_V-9bDeaEmSvXH2fu582MKCQ4MvMI-XyHmxnzjDZ5PhdiEGjDA1drXsKBsPR8PRQsBuAEmSwMd_97IzsbdIyapaSnUNRbTM6Gznoker9xHDW_a3aMBBoSo2pfeeIwKcRTEQNXqeE80huG0lLASX616_xkLGig-6sDveKiO52a1VIicfcSBi0x61z8wfwak25LzIC1kFBisnWY_It4JumzZwVyYQM7KThVm1ePQVw4fv15aTFQdQXCbK1WkwuuQJKtenk3SSTU5kNsbJ8Vg-HY-1Wo5OT4rsyajQx0ejTIrdbiBw__6LLt33IT8QnMzvnat7UbuvuG0THA
+
+participant user
+    participant browser
+    participant server
+
+    user->>browser: Enters text into input box and clicks SAVE
+    browser->>server: POST text input to server at /new_note address
+    activate server
+    server-->>browser: Respond with 302 status (URL redirect)
+    deactivate server
+
+ 
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes, including the new one
+    
+   _____________________________________________________________________________________________________________________________________________ 
+    [0.5: Single page app diagram]
+    
+    https://mermaid.ink/img/pako:eNq1VFFv0zAQ_iuWn7uEttBteZiEYAIhNhDt05SXq31JTB072JduVdX_zrlpK8QQGgzyZH_33d3nL6fbSuU1ykJG_NajU_jWQB2gLZ3gr4NARpkOHIk-YniMLoO__2WAwXXCh0hKPru6OrAL8cYatYrCGrcS5MX88-uBdyAwdcgvxLvrhQhJW6TEbIi6WOR5pF4bjJmKWYM2ch2TVSbHB2g7i9B1eexgqAmKzBoIT5ISOJzPftT0BWPnnRb3hhp-So3i_eLm40DX-KjK7wQ_XWULxnE4_plUalBwkqiMxf8skG3Mvv6FvA-whrkKpqOnqLz1DAVTNyR8JU6FFlzocBGReLqiwAdUPRlX_9wlzTFjwP2QVINxIMw_3Yoq-HZ_-7fWaKDkjXfPmLO9PggBNunhjm2Iz7dq8OjggAJrl6BWouodV_RuMCmg0xgGyr6tHMkWA8-j5m2wTb1KycEWS1nwUWMFvaVSlm7HVOjJzzdOyYJCjyPZd-zGcXnIogIbT-i1NuTDCbQeuLMstpI2XVo9tYnEJZV3lakT3gfL8PFHpHBWs1n9MlO-zaPRDY9Cs76c5bPJ7AImU5ydT-HVdKrVcnx5UU1ejit9_mI8AbnbjSTu-98Me26_7kaSd9Sd90elu-_Hg8H0?type=png)](https://mermaid.live/edit#pako:eNq1VFFv0zAQ_iuWn7uEttBteZiEYAIhNhDt05SXq31JTB072JduVdX_zrlpK8QQGgzyZH_33d3nL6fbSuU1ykJG_NajU_jWQB2gLZ3gr4NARpkOHIk-YniMLoO__2WAwXXCh0hKPru6OrAL8cYatYrCGrcS5MX88-uBdyAwdcgvxLvrhQhJW6TEbIi6WOR5pF4bjJmKWYM2ch2TVSbHB2g7i9B1eexgqAmKzBoIT5ISOJzPftT0BWPnnRb3hhp-So3i_eLm40DX-KjK7wQ_XWULxnE4_plUalBwkqiMxf8skG3Mvv6FvA-whrkKpqOnqLz1DAVTNyR8JU6FFlzocBGReLqiwAdUPRlX_9wlzTFjwP2QVINxIMw_3Yoq-HZ_-7fWaKDkjXfPmLO9PggBNunhjm2Iz7dq8OjggAJrl6BWouodV_RuMCmg0xgGyr6tHMkWA8-j5m2wTb1KycEWS1nwUWMFvaVSlm7HVOjJzzdOyYJCjyPZd-zGcXnIogIbT-i1NuTDCbQeuLMstpI2XVo9tYnEJZV3lakT3gfL8PFHpHBWs1n9MlO-zaPRDY9Cs76c5bPJ7AImU5ydT-HVdKrVcnx5UU1ejit9_mI8AbnbjSTu-98Me26_7kaSd9Sd90elu-_Hg8H0
+    
+    participant user
+    participant browser
+    participant server
+
+    user->>browser: Clicks link to SPA
+    browser->>server: GET request to https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: Respond with page HTML
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: Respond with JSON array of notes
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that renders the notes
+    
+    
+    _____________________________________________________________________________________________________________________________________________
+    [0.6: New note in Single page app diagram]
+    
+    https://mermaid.ink/img/pako:eNqNU8tu2zAQ_BWCpxZw5NhunUSHAAWaS4AmRd32UBgI1uRKYiORLLn0A4H_PUvJNtKmKKqDIA1nZ4f7eJLKaZSljPgroVX40UAdoFtawY-HQEYZD5ZEihheo6vgNn89YHCd8eEkB59dXx_YpbixhCEKwi0JY8nxyydWc1sBVgvVGvUYxeLD95sh_s4RimDqhoSrxEnmFtYQVTCehA-4RktRaKwgtWwgrTrT06lBUbnQFVlJ_Ldgig3GPtjiRtgcwEbzP25NJGPrAYQQYNfbDhjQ6v5izGqZVLzI1mL1e7Jv_OY6_ZkEvEcIwtke9lAzFPvaHi_T047yQ4aDKNd4KHwpPt8vvorbxf2dcKufqCibb4h8LMfjSEkbjIWKRYNtNPbRFJUZ4xY63yIbGLObh5zmIXr4d8VeZFDOEhgbBYilzD_ckKUUlcFWH70fWp67nUuWmRoITzRuFINkOhSR2M6QHBSZNdNOY5XB4fvs5Vx9wegdy24MNWJ6PskalKJ4owJyuH47RGp8JdhP6mFc5Uh2GDowmhfjKUNLyd47dllmv8OELeXS7pkKidxiZ5UsKSQcyeTzhQ57JMsK2nhCb7QhF05g64DHRZZPknY-b2HNTWVJrl1l6oyn0DJ87Fs-Lmq-W1oVynXjaHTDc9Gsr-bj-XR-CdMZzi9m8H4202o1ubqspu8mlb44n0xB7vcjiX3-T8PK95s_kryuP5w7Ot0_A04vaCQ?type=png)](https://mermaid.live/edit#pako:eNqNU8tu2zAQ_BWCpxZw5NhunUSHAAWaS4AmRd32UBgI1uRKYiORLLn0A4H_PUvJNtKmKKqDIA1nZ4f7eJLKaZSljPgroVX40UAdoFtawY-HQEYZD5ZEihheo6vgNn89YHCd8eEkB59dXx_YpbixhCEKwi0JY8nxyydWc1sBVgvVGvUYxeLD95sh_s4RimDqhoSrxEnmFtYQVTCehA-4RktRaKwgtWwgrTrT06lBUbnQFVlJ_Ldgig3GPtjiRtgcwEbzP25NJGPrAYQQYNfbDhjQ6v5izGqZVLzI1mL1e7Jv_OY6_ZkEvEcIwtke9lAzFPvaHi_T047yQ4aDKNd4KHwpPt8vvorbxf2dcKufqCibb4h8LMfjSEkbjIWKRYNtNPbRFJUZ4xY63yIbGLObh5zmIXr4d8VeZFDOEhgbBYilzD_ckKUUlcFWH70fWp67nUuWmRoITzRuFINkOhSR2M6QHBSZNdNOY5XB4fvs5Vx9wegdy24MNWJ6PskalKJ4owJyuH47RGp8JdhP6mFc5Uh2GDowmhfjKUNLyd47dllmv8OELeXS7pkKidxiZ5UsKSQcyeTzhQ57JMsK2nhCb7QhF05g64DHRZZPknY-b2HNTWVJrl1l6oyn0DJ87Fs-Lmq-W1oVynXjaHTDc9Gsr-bj-XR-CdMZzi9m8H4202o1ubqspu8mlb44n0xB7vcjiX3-T8PK95s_kryuP5w7Ot0_A04vaCQ
+    
+    participant user
+    participant browser
+    participant server
+
+    user->>browser: Enters text into input box and clicks SAVE
+    Note right of browser: Javascript prevents default submit of the form.     
+    Note right of browser: Javascript pushes the new note to the existing note array and rerenders the list.
+    Note left of browser: User sees the new note appear on the page as part of the note list.
+ 
+    browser->>server: POST JSON object to https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note right of browser: JSON object contains a "content" field of the text input and a "date" field for a time stamp
+    activate server
+    server-->>browser: Respond with 201 status (created)
+    deactivate server
